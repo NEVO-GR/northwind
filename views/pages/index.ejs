@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>try</title>
+</head>
+<body>
+    <h1>this is our projects</h1>
+    <ul>
+        <% for(datum of products) { %>
+            <li><%= datum.ProductName %> - <%= datum.UnitsInStock %> - <%= datum.UnitPrice %></li>
+        <% } %>
+    </ul>
+</body>
+</html>
