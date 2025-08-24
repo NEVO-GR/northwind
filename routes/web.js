@@ -6,7 +6,15 @@ route.get("/", (req, res) => {
     controllerNorthwind.home(req, res);
 })
 
-route.get("/cats", (req, res) => {
-    controllerNorthwind.cats(req, res);
+route.get("/products", (req, res) => {
+    controllerNorthwind.products(req, res);
 })
+
+route.get("/products/create", controllerNorthwind.showCreateProduct)
+
+route.get("/products/update/:id", controllerNorthwind.showUpdateProduct)
+
+// route.post("/products/update/new/:id");
+// route.
+
 module.exports = route

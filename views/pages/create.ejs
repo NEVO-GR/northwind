@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Product</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+  <div class="container py-5">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h1 class="fw-bold text-dark"><i class="bi bi-plus-circle"></i> Create New Product</h1>
+      <a href="/products" class="btn btn-secondary">
+        <i class="bi bi-arrow-left"></i> Back to Products
+      </a>
+    </div>
+
+    <!-- Form Card -->
+    <div class="card shadow rounded-3">
+      <div class="card-body">
+        <form action="/products/create" method="POST" class="row g-3">
+          
+          <!-- Product Name -->
+          <div class="col-md-6">
+            <label class="form-label">Product Name</label>
+            <input type="text" name="ProductName" class="form-control" placeholder="Enter product name" required>
+          </div>
+
+          <!-- Supplier -->
+          <div class="col-md-6">
+            <label class="form-label">Supplier</label>
+            <select name="SupplierID" class="form-select" required>
+              <option value="">-- Select Supplier --</option>
+              <% suppliers.forEach(sup => { %>
+                <option value="<%= sup.SupplierID %>"><%= sup.CompanyName %></option>
+              <% }) %>
+            </select>
+          </div>
+
+          <!-- Category -->
+          <div class="col-md-6">
+            <label class="form-label">Category</label>
+            <select name="CategoryID" class="form-select" required>
+              <option value="">-- Select Category --</option>
+              <% categories.forEach(cat => { %>
+                <option value="<%= cat.CategoryID %>"><%= cat.CategoryName %></option>
+              <% }) %>
+            </select>
+          </div>
+
+          <!-- Quantity Per Unit -->
+          <div class="col-md-6">
+            <label class="form-label">Quantity Per Unit</label>
+            <input type="text" name="QuantityPerUnit" class="form-control" placeholder="e.g. 24 - 12 oz bottles" required>
+          </div>
+
+          <!-- Unit Price -->
+          <div class="col-md-4">
+            <label class="form-label">Unit Price ($)</label>
+            <input type="number" name="UnitPrice" class="form-control" step="0.01" min="0" required>
+          </div>
+
+          <!-- Units In Stock -->
+          <div class="col-md-4">
+            <label class="form-label">Units In Stock</label>
+            <input type="number" name="UnitsInStock" class="form-control" min="0" required>
+          </div>
+
+          <!-- Units On Order -->
+          <div class="col-md-4">
+            <label class="form-label">Units On Order</label>
+            <input type="number" name="UnitsOnOrder" class="form-control" min="0" required>
+          </div>
+
+          <!-- Reorder Level -->
+          <div class="col-md-6">
+            <label class="form-label">Reorder Level</label>
+            <input type="number" name="ReorderLevel" class="form-control" min="0" required>
+          </div>
+
+          <!-- Discontinued -->
+          <div class="col-md-6">
+            <label class="form-label">Discontinued</label>
+            <select name="Discontinued" class="form-select">
+              <option value="0" selected>No</option>
+              <option value="1">Yes</option>
+            </select>
+          </div>
+
+          <!-- Submit -->
+          <div class="col-12 text-end">
+            <button type="submit" class="btn btn-success px-4">
+              <i class="bi bi-save"></i> Save Product
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

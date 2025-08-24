@@ -1,4 +1,5 @@
 const mysql = require("mysql2");
+const { suppliers } = require("../conrollers/controllerNorthwind");
 require("dotenv").config();
 
 const pool = mysql.createPool({
@@ -62,8 +63,64 @@ function showAllCategories() {
     })
 }
 
+function showAllSuppliers() {
+    return new Promise((resolve, reject) => {
+        pool.query("SELECT * FROM suppliers", [], (err, result) => {
+            if(!err) {
+                resolve(result);
+            }else {
+                reject(err);
+            }
+        })
+        
+    })
+}
+function showAllProducts() {
+    return new Promise((resolve, reject) => {
+        const q = `SELECT p.ProductID, p.ProductName, s.CompanyName, c.CategoryName,p.QuantityPerUnit, p.UnitPrice, p.UnitsInStock, p.UnitsOnOrder, p.ReorderLevel, p.Discontinued 
+                    FROM products AS p, suppliers AS s, categories AS c
+                    WHERE p.CategoryID = c.CategoryID AND p.SupplierID = s.SupplierID;`;
+        pool.query(q, [], (err, result) => {
+            if(!err) {
+                resolve(result);
+            }else {
+                reject(err);
+            }
+        })
+        
+    })
+}
+function showOneProduct(id) {
+    return new Promise((resolve, reject) => {
+        const q = "SELECT * FROM products WHERE ProductID = ?";
+        pool.query(q, [id], (err, result) => {
+            if (!err) {
+                resolve(result)
+            }else {
+                reject(err)
+            }
+        })
+    })
+}
+
+// function createProduct() {
+//     const suppliers = showAllSuppliers().then((resolve) => {
+//         return resolve()
+//     })
+//     const categories = showAllCategories().then((resolve) => {
+//         return resolve()
+//     })
+
+//     return new Promise((resolve, reject) => {
+//         resolve({suppliers, categories})
+//     })
+// }
+
 module.exports = {
     showAllData,
-    showAllCategories
+    showAllCategories,
+    showAllSuppliers,
+    showAllProducts,
+    showOneProduct
     // showOneData
 }
